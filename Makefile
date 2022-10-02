@@ -9,10 +9,9 @@ test:
 all: build
 
 build: get
-	go build -trimpath -ldflags \
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-linux-musl-gcc CXX=x86_64-linux-musl-g++ go build -trimpath -ldflags \
 	"-s -w -buildid= \
 	-X 'github.com/indes/flowerss-bot/internal/config.commit=$(COMMIT)' \
-	-X 'github.com/indes/flowerss-bot/internal/config.date=$(DATA)' \
 	-X 'github.com/indes/flowerss-bot/internal/config.version=$(VERSION)'" -o $(app_name)
 
 get:

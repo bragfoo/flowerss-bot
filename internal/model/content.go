@@ -17,7 +17,7 @@ type Content struct {
 	RawID        string
 	RawLink      string
 	Title        string
-	Description  string `gorm:"-"` //ignore to db
+	Description  string `gorm:"-"` // ignore to db
 	TelegraphURL string
 	EditTime
 }
@@ -38,13 +38,13 @@ func getContentByFeedItem(source *Source, item *rss.Item) (Content, error) {
 	}
 
 	var c = Content{
-		Title:        strings.Trim(item.Title, " "),
-		Description:  html, //replace all kinds of <br> tag
 		SourceID:     source.ID,
-		RawID:        item.ID,
 		HashID:       id.GenHashID(source.Link, item.ID),
-		TelegraphURL: TelegraphURL,
+		RawID:        item.ID,
 		RawLink:      item.Link,
+		Title:        strings.Trim(item.Title, " "),
+		Description:  html, // replace all kinds of <br> tag
+		TelegraphURL: TelegraphURL,
 	}
 
 	return c, nil
